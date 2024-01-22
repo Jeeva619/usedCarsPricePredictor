@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>ML API</title>
+
+<style>
+    @font-face {
+  font-family: 'Edo';
+  src: url('D:/work/CarPricePredictor/CarPricepredictor/templates/fonts/edosz.ttf') format('truetype');
+ 
+}
+
+    body {
+        font-family: 'edosz', sans-serif;
+        margin: 0;
+        padding: 0;
+        font-size: large;
+      }
+      input::placeholder {
+  font-family: 'Edo SZ'; /* Change the font family as needed */
+  font-style: italic; /* Change the font style as needed */
+  color: #999; /* Change the color as needed */
+}
+
+input[type="text"] {
+  width: 140px; /* Set the width as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif; /* Change the font family as needed */
+  font-size: 16px; /* Change the font size as needed */
+  color: #333; /* Change the text color as needed */
+  background-color: #f5f5f5; /* Change the background color as needed */
+}
+    .login {
+        position: relative;
+        max-width: 100%;
+      }
+      img {
+        max-width: 100%;
+      width: 100%;
+      height: auto;
+      display: block;
+            margin: 0 auto; /* Center the image */
+    }
+    .center {   
+      position: absolute;
+      top: 180px; /* adjust the top position as needed */
+      left: 180px; /* adjust the left position as needed */
+      width: 450px; /* set the width of the table */
+      height: 600px;
+      border-collapse: collapse;
+      background-color: #ff8c73; /* set the background color with transparency */
+      font-style:'edo_sz',;
+      color: rgb(255, 255, 255);
+      outline-color: #333;
+    }
+    .center th, .center td {
+      border: 1px solid #ff8c73;
+      padding: 8px;
+      text-align: left;   
+      font-size: 22px;  
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;;
+    }
+    .Header{
+        top: 0px;
+        left: 300px;
+        position:absolute;
+        font-size: 45px;
+        color: #ddfb73;
+        z-index: 1; 
+    }
+    .btn-primary{
+        height: 50px; 
+        width: 100px;
+        font-size: large;
+    }
+    .prediction-text {
+        top: 225px;
+        left: 1050px;
+        position:absolute;
+        font-size: 65px;
+        color: #ddfb73; /* Change the color as needed */
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+        /* Navigation bar style */
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Social media icons style */
+        .social-icons {
+            margin-right: 10px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+</style>
+
+</head>
+<body>
+    <div class="navbar">
+        <div class="social-icons">
+            <a href="https://www.facebook.com/jeeva.jeeva.39589" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.naukri.com/mnjuser/profile?id=&altresid" target="_blank"><i class="fab fa-naukri"></i></a>
+            <a href="https://www.linkedin.com/in/jeevanantham-balamurugan-97b5431a1/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <!-- Add other navigation elements here -->
+    </div>
+    <div class="login">
+        <img src="{{ url_for('static', filename='Latest.jpg') }}" alt="Your Image">
+        <!-- Main Input For Receiving Query to our ML -->
+        <table class="center" style="font-family: 'Edo SZ'" >
+            <form action="{{ url_for('predict_api')}}" method="post">
+                
+            <tr>
+                <td>
+                    <label for="name"> Kilometers Driven</label>
+                </td>
+                <td>
+                    <input type="text" name="Kilometers_Driven" placeholder="Kilometers Driven till date" required="required" /><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Mileage</label>
+                </td>
+                <td>
+                    <input type="text" name="Mileage" placeholder="Mileage in Kmpl" required="required" /><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Engine</label>
+                </td>
+                <td>
+                    <input type="text" name="Engine" placeholder="Engine" required="required" /><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Power</label>
+                </td>
+                <td>
+                    <input type="text" name="Power" placeholder="Power" required="required" /><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Seats</label>
+                </td>
+                <td>
+                    <input type="text" name="Seats" placeholder="Number of Seats" required="required" /><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Age</label>
+                </td>
+                <td>
+                    <input type="text" name="Age" placeholder="Age of the Car" required="required" /><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Fuel_Type</label>
+                </td>
+                <td>
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="optionsFuel_Type" id="option1" value="Petrol" checked> Petrol
+                    </label>
+                </td>
+                <td>
+                    <label class="btn btn-primary">
+                        <input type="radio" name="optionsFuel_Type" id="option2" value="Diesel"> Diesel
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="name"> Transmission</label>
+                </td>
+                <td>
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="optionsTransmisssion" id="option3" value="Automatic" checked> Automatic
+                    </label>
+                </td>
+                <td>
+                    <label class="btn btn-primary active">
+                        <input type="radio" name="optionsTransmisssion" id="option4"  value="Manual"> Manual
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name"> Prev_Owners</label>
+                </td>
+                <td>
+                    <input type="text" name="Prev_Owners" placeholder="How Many owners Previously" required="required" /> <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <button type="submit" class="btn-primary"style="font-family: 'Edo SZ'" >Predict</button>
+                </td>
+            </tr>
+            </form>
+        </table>
+
+    </div>
+    <div class="prediction-text" style="font-family: 'Edo SZ'">
+        {{prediction_text}}
+    </div>
+    
+</body>
+
+</html>
