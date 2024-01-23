@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>ML API</title>
 
 <style>
@@ -49,12 +49,12 @@ input[type="text"] {
     }
     .center {   
       position: absolute;
-      top: 180px; /* adjust the top position as needed */
-      left: 180px; /* adjust the left position as needed */
-      width: 450px; /* set the width of the table */
-      height: 600px;
+      top: 130px; /* adjust the top position as needed */
+      left: 160px; /* adjust the left position as needed */
+      width: 400px; /* set the width of the table */
+      height: 340px;
       border-collapse: collapse;
-      background-color: #ff8c73; /* set the background color with transparency */
+      background-color: #ff8c73; /* set the background color with transparency Orginal color  #ff8c73; */
       font-style:'edo_sz',;
       color: rgb(255, 255, 255);
       outline-color: #333;
@@ -63,7 +63,7 @@ input[type="text"] {
       border: 1px solid #ff8c73;
       padding: 8px;
       text-align: left;   
-      font-size: 22px;  
+      font-size: 18px;  
       text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;;
     }
     .Header{
@@ -75,20 +75,27 @@ input[type="text"] {
         z-index: 1; 
     }
     .btn-primary{
-        height: 50px; 
-        width: 100px;
+        height: 30px; 
+        width: 70px;
         font-size: large;
     }
     .prediction-text {
-        top: 225px;
-        left: 1050px;
+        top: 210px;
+        left: 650px;
         position:absolute;
         font-size: 65px;
         color: #ddfb73; /* Change the color as needed */
         text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     }
-        /* Navigation bar style */
-        .navbar {
+    .title{
+        top: 65px;
+        left: 400px;
+        position:absolute;
+        font-size: 65px;
+        color: #ddfb73; /* Change the color as needed */
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+    .navbar {
             background-color: #333;
             padding: 10px;
             color: #fff;
@@ -106,6 +113,7 @@ input[type="text"] {
             text-decoration: none;
             margin-right: 15px;
         }
+
 </style>
 
 </head>
@@ -118,6 +126,7 @@ input[type="text"] {
         </div>
         <!-- Add other navigation elements here -->
     </div>
+
     <div class="login">
         <img src="{{ url_for('static', filename='Latest.jpg') }}" alt="Your Image">
         <!-- Main Input For Receiving Query to our ML -->
@@ -225,6 +234,10 @@ input[type="text"] {
     </div>
     <div class="prediction-text" style="font-family: 'Edo SZ'">
         {{prediction_text}}
+    </div>
+    <div class="title" style="font-family: 'Edo SZ'">
+    <label> 
+        Used Cars Price Predictor</label>
     </div>
     
 </body>

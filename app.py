@@ -2,10 +2,12 @@ import pickle
 from flask import Flask,request,app,jsonify,url_for,render_template
 import numpy as np
 import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
 
 app = Flask(__name__,static_url_path="/static")
 
 model = pickle.load(open('UsedCarPricePredictor.pkl','rb'))
+#model = DecisionTreeRegressor(random_state=42,monotonic_cst = [1, -1, 1])
 
 @app.route('/')
 
@@ -60,7 +62,7 @@ def predict_api():
     output =  model.predict(newdata)
     print(output[0])
     #return jsonify("Expected amount would be  "+str(output[0])+"  lakhs")
-    return render_template("home.html",prediction_text = str(output[0])+" lakhs")
+    return render_template("home.html",prediction_text = "Expected RS,"+str(output[0])+" lakhs")
 @app.route('/predict_PostMan',methods = ['POST'])
 def predict_PostMan():
     data = request.json['data']
