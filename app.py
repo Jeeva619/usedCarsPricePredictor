@@ -3,8 +3,10 @@ from flask import Flask,request,app,jsonify,url_for,render_template
 import numpy as np
 import pandas as pd
 from sklearn.tree import DecisionTreeRegressor
+from flask_cors import CORS
 
 app = Flask(__name__,static_url_path="/static")
+CORS(app)
 
 model = pickle.load(open('UsedCarPricePredictor.pkl','rb'))
 #model = DecisionTreeRegressor(random_state=42,monotonic_cst = [1, -1, 1])
