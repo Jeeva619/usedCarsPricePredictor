@@ -1,245 +1,234 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>ML API</title>
-
+<title>Used Car Price Predictor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-    @font-face {
-  font-family: 'Edo';
-  src: url('D:/work/CarPricePredictor/CarPricepredictor/templates/fonts/edosz.ttf') format('truetype');
- 
+	#footer a,i{
+	  height: 100px;
+	  width: 100px;
+	  display: inline-block;
+	  margin: 5px;
+	  color: black;
+	}
+	#footer a,i:hover {
+	  transition: all 0.3s ease-out;
+	  -webkit-transition: all 0.3s ease-out;
+	  size: 22cm;
+	}
+	#footer .twitter:hover {
+	  background-position: -150px -56px;
+	}
+	#footer .facebook:hover {
+	  background-position: -233px -56px;
+	}
+	#footer .skype:hover {
+	  background-position: -156px -56px;
+	}
+	#footer .linkedin:hover {
+	  background-position: -78px -56px;
+	}
+	#footer .flickr:hover {
+	  background-position: -310px -56px;
+	}
+	.bg-dark-1{
+	  background-color: #4a022b;
+	background-image: linear-gradient(225deg, #000000 0%, #070707 50%, #fafdff 100%);
+	 
+	}
+
+	.radio-buttons {
+    display: flex;
+	}
+
+	.radio-buttons .form-check-inline {
+    margin-right: 140px; /* Adjust margin as needed */
+	margin-left: 5px;
+	}
+	.labelDisel{
+	margin-right: 1px; /* Adjust margin as needed */
+	margin-left: 58px;
+	}
+	 .labelPetrol{
+	margin-right: 1px; /* Adjust margin as needed */
+	margin-left: 58px;
+	 }
+
+	 
+	 .labelAutomatic{
+	margin-right: 1px; /* Adjust margin as needed */
+	margin-left: 65px;
+	 }
+	 .labelmanual{
+	margin-right: 1px; /* Adjust margin as needed */
+	margin-left: 30px;
+	 }
+	 
+
+	 .form-check .form-check-inline1{
+		top: 12px;
+		left: 999px;
+		margin-right: 140px; /* Adjust margin as needed */
+	margin-left: 5px;
+	 }
+.returntext{
+	font-size: xx-large;
 }
-
-    body {
-        font-family: 'edosz', sans-serif;
-        margin: 0;
-        padding: 0;
-        font-size: large;
-      }
-      input::placeholder {
-  font-family: 'Edo SZ'; /* Change the font family as needed */
-  font-style: italic; /* Change the font style as needed */
-  color: #999; /* Change the color as needed */
+.head{
+	font-size: xx-large;
 }
+	</style>
 
-input[type="text"] {
-  width: 140px; /* Set the width as needed */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: 'Arial', sans-serif; /* Change the font family as needed */
-  font-size: 16px; /* Change the font size as needed */
-  color: #333; /* Change the text color as needed */
-  background-color: #f5f5f5; /* Change the background color as needed */
-}
-    .login {
-        position: relative;
-        max-width: 100%;
-      }
-      img {
-        max-width: 100%;
-      width: 100%;
-      height: auto;
-      display: block;
-            margin: 0 auto; /* Center the image */
-    }
-    .center {   
-      position: absolute;
-      top: 130px; /* adjust the top position as needed */
-      left: 160px; /* adjust the left position as needed */
-      width: 400px; /* set the width of the table */
-      height: 340px;
-      border-collapse: collapse;
-      background-color: #ff8c73; /* set the background color with transparency Orginal color  #ff8c73; */
-      font-style:'edo_sz',;
-      color: rgb(255, 255, 255);
-      outline-color: #333;
-    }
-    .center th, .center td {
-      border: 1px solid #ff8c73;
-      padding: 8px;
-      text-align: left;   
-      font-size: 18px;  
-      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;;
-    }
-    .Header{
-        top: 0px;
-        left: 300px;
-        position:absolute;
-        font-size: 45px;
-        color: #ddfb73;
-        z-index: 1; 
-    }
-    .btn-primary{
-        height: 30px; 
-        width: 70px;
-        font-size: large;
-    }
-    .prediction-text {
-        top: 210px;
-        left: 650px;
-        position:absolute;
-        font-size: 65px;
-        color: #ddfb73; /* Change the color as needed */
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-    }
-    .title{
-        top: 65px;
-        left: 400px;
-        position:absolute;
-        font-size: 65px;
-        color: #ddfb73; /* Change the color as needed */
-        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-    }
-    .navbar {
-            background-color: #333;
-            padding: 10px;
-            color: #fff;
-            display: flex;
-            justify-content: flex-end;
-        }
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}">
 
-        /* Social media icons style */
-        .social-icons {
-            margin-right: 10px;
-        }
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
 
-        .social-icons a {
-            color: #fff;
-            text-decoration: none;
-            margin-right: 15px;
-        }
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 
-</style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
 
-</head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animsition/css/animsition.min.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+		
+<meta name="robots" content="noindex, follow">
+<script nonce="4fc00f5e-df91-4ce6-8f9e-753e817de8fe">try{(function(w,d){!function(bb,bc,bd,be){bb[bd]=bb[bd]||{};bb[bd].executed=[];bb.zaraz={deferred:[],listeners:[]};bb.zaraz.q=[];bb.zaraz._f=function(bf){return async function(){var bg=Array.prototype.slice.call(arguments);bb.zaraz.q.push({m:bf,a:bg})}};for(const bh of["track","set","debug"])bb.zaraz[bh]=bb.zaraz._f(bh);bb.zaraz.init=()=>{var bi=bc.getElementsByTagName(be)[0],bj=bc.createElement(be),bk=bc.getElementsByTagName("title")[0];bk&&(bb[bd].t=bc.getElementsByTagName("title")[0].text);bb[bd].x=Math.random();bb[bd].w=bb.screen.width;bb[bd].h=bb.screen.height;bb[bd].j=bb.innerHeight;bb[bd].e=bb.innerWidth;bb[bd].l=bb.location.href;bb[bd].r=bc.referrer;bb[bd].k=bb.screen.colorDepth;bb[bd].n=bc.characterSet;bb[bd].o=(new Date).getTimezoneOffset();if(bb.dataLayer)for(const bo of Object.entries(Object.entries(dataLayer).reduce(((bp,bq)=>({...bp[1],...bq[1]})),{})))zaraz.set(bo[0],bo[1],{scope:"page"});bb[bd].q=[];for(;bb.zaraz.q.length;){const br=bb.zaraz.q.shift();bb[bd].q.push(br)}bj.defer=!0;for(const bs of[localStorage,sessionStorage])Object.keys(bs||{}).filter((bu=>bu.startsWith("_zaraz_"))).forEach((bt=>{try{bb[bd]["z_"+bt.slice(7)]=JSON.parse(bs.getItem(bt))}catch{bb[bd]["z_"+bt.slice(7)]=bs.getItem(bt)}}));bj.referrerPolicy="origin";bj.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(bb[bd])));bi.parentNode.insertBefore(bj,bi)};["complete","interactive"].includes(bc.readyState)?zaraz.init():bb.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script></head>
 <body>
-    <div class="navbar">
-        <div class="social-icons">
-            <a href="https://www.facebook.com/jeeva.jeeva.39589" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.naukri.com/mnjuser/profile?id=&altresid" target="_blank"><i class="fab fa-naukri"></i></a>
-            <a href="https://www.linkedin.com/in/jeevanantham-balamurugan-97b5431a1/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        </div>
-        <!-- Add other navigation elements here -->
+<div class="limiter">
+	<div class="container-login100" style="background-image: url('{{ url_for('static', filename='images/bg-01.jpg') }}');" >
+<div class="wrap-login100 p-t-30 p-b-50">
+<span class="login100-form-title p-b-41">
+	<div class="head" style="font-family: 'Edo SZ'">
+Used Car Price Predictor
+</div>
+</span>
+<form class="login100-form validate-form p-b-33 p-t-5" action="{{ url_for('predict_api')}}" method="post">
+<div class="wrap-input100 validate-input" data-validate="Enter Kilometers Driven in Kms">
+<input class="input100" type="text" name="Kilometers_Driven" placeholder="Kilometers Driven in Kms">
+<span class="focus-input100" data-placeholder="&#xe84e;"></span>
+</div>
+<div class="wrap-input100 validate-input" data-validate="Enter Mileage in Kms">
+<input class="input100" type="text" name="Mileage" placeholder="Mileage in Kms">
+<span class="focus-input100" data-placeholder="&#xe84e;"></span>
+</div>
+<div class="wrap-input100 validate-input" data-validate="Enter Engine Capacity in ltrs">
+<input class="input100" type="text" name="Engine" placeholder="Engine Capacity in ltrs">
+<span class="focus-input100" data-placeholder="&#xe84e;"></span>
+</div>
+<div class="wrap-input100 validate-input" data-validate="Enter Power in bhp">
+<input class="input100" type="text" name="Power" placeholder="Power in bhp">
+<span class="focus-input100" data-placeholder="&#xe84e;"></span>
+</div>
+<div class="wrap-input100 validate-input" data-validate="Number of seats">
+<input class="input100" type="text" name="Seats" placeholder="Number of seats">
+<span class="focus-input100" data-placeholder="&#xe82b;"></span>
+</div>
+<div class="wrap-input100 validate-input" data-validate="Enter Age of the car">
+<input class="input100" type="text" name="Age" placeholder="Age of the car">
+<span class="focus-input100" data-placeholder="&#xe813;"></span>
+</div>
+
+<div class="form-group">
+                <label for="optionsFuel_Type"></label>
+                <div class="radio-buttons">
+                    <div class="form-check form-check-inline">
+                        <input class="rinput100 form-check-input" id="p" type="radio" name="optionsFuel_Type" value="Petrol">
+                        <label class="labelPetrol" for="p">Petrol</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="rinput100 form-check-input" id="d" type="radio" name="optionsFuel_Type" value="Diesel">
+                        <label class="labelDisel" for="d">Diesel</label>
+                    </div>
+                </div>
+</div>
+
+
+<div class="form-group">
+	<div class="radio-buttons">
+    <div class="form-check form-check-inline">
+        <input class="rinput100 form-check-input" id="a" type="radio" name="optionsTransmisssion" value="Automatic">
+        <label class="labelAutomatic" for="a">Automatic</label>
+    </div>
+    <div class="form-check form-check-inline1">
+        <input class="rinput100 form-check-input" id="m" type="radio" name="optionsTransmisssion" value="Manual">
+        <label class="labelmanual" for="m">Manual</label>
+    </div>
+</div>
+</div>
+
+
+<div class="wrap-input100 validate-input" data-validate="Enter number Prev_Owners">
+<input class="input100" type="text" name="Prev_Owners" placeholder="number Of Prev_Owners">
+<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+</div>
+<div class="container-login100-form-btn m-t-32">
+<button class="login100-form-btn">
+Submit
+</button>
+
+<div class="wrap-input100 validate-input" style="font-family: 'Edo SZ'">
+    <div class="returntext">
+	{{prediction_text}}
+</div>  
     </div>
 
-    <div class="login">
-        <img src="{{ url_for('static', filename='Latest.jpg') }}" alt="Your Image">
-        <!-- Main Input For Receiving Query to our ML -->
-        <table class="center" style="font-family: 'Edo SZ'" >
-            <form action="{{ url_for('predict_api')}}" method="post">
-                
-            <tr>
-                <td>
-                    <label for="name"> Kilometers Driven</label>
-                </td>
-                <td>
-                    <input type="text" name="Kilometers_Driven" placeholder="Kilometers Driven till date" required="required" /><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Mileage</label>
-                </td>
-                <td>
-                    <input type="text" name="Mileage" placeholder="Mileage in Kmpl" required="required" /><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Engine</label>
-                </td>
-                <td>
-                    <input type="text" name="Engine" placeholder="Engine" required="required" /><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Power</label>
-                </td>
-                <td>
-                    <input type="text" name="Power" placeholder="Power" required="required" /><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Seats</label>
-                </td>
-                <td>
-                    <input type="text" name="Seats" placeholder="Number of Seats" required="required" /><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Age</label>
-                </td>
-                <td>
-                    <input type="text" name="Age" placeholder="Age of the Car" required="required" /><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Fuel_Type</label>
-                </td>
-                <td>
-                    <label class="btn btn-primary active">
-                        <input type="radio" name="optionsFuel_Type" id="option1" value="Petrol" checked> Petrol
-                    </label>
-                </td>
-                <td>
-                    <label class="btn btn-primary">
-                        <input type="radio" name="optionsFuel_Type" id="option2" value="Diesel"> Diesel
-                    </label>
-                </td>
-            </tr>
 
-            <tr>
-                <td>
-                    <label for="name"> Transmission</label>
-                </td>
-                <td>
-                    <label class="btn btn-primary active">
-                        <input type="radio" name="optionsTransmisssion" id="option3" value="Automatic" checked> Automatic
-                    </label>
-                </td>
-                <td>
-                    <label class="btn btn-primary active">
-                        <input type="radio" name="optionsTransmisssion" id="option4"  value="Manual"> Manual
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="name"> Prev_Owners</label>
-                </td>
-                <td>
-                    <input type="text" name="Prev_Owners" placeholder="How Many owners Previously" required="required" /> <br>
-                </td>
-            </tr>
-            <tr>
-                <td>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div id="dropDownSelect1"></div>
 
-                </td>
-                <td>
-                    <button type="submit" class="btn-primary"style="font-family: 'Edo SZ'" >Predict</button>
-                </td>
-            </tr>
-            </form>
-        </table>
+<!-- Footer Section begins -->
+<footer class="bg-dark-1">
+  <section id="footer" class="py-5">
+    <div class="container text-center">
+				<a href="https://www.facebook.com/jeeva.jeeva.39589" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/jeevanantham-balamurugan-97b5431a1/" target="_blank"><i class="fab fa-linkedin"></i></a> 
+                <a href="https://www.naukri.com/mnjuser/profile?id=&altresid" target="_blank"><i class="fa-solid fa-envelope"></i></a> 
+      <h6 class="m-0 mt-4 text-center text-white text-capitalize" style="font-family: 'Edo SZ'">Copyright &copy; 2024 designed by Jeevanantham</h6>
+    </div>
+  </section>
+</footer>
+<!-- Footer Section Ends-->
+<script src="{{ url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="{{ url_for('static', filename='vendor/animsition/js/animsition.min.js') }}"></script>
 
-    </div>
-    <div class="prediction-text" style="font-family: 'Edo SZ'">
-        {{prediction_text}}
-    </div>
-    <div class="title" style="font-family: 'Edo SZ'">
-    <label> 
-        Used Cars Price Predictor</label>
-    </div>
-    
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/popper.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="{{ url_for('static', filename='vendor/select2/select2.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='vendor/daterangepicker/moment.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
+
+<script src="{{ url_for('static', filename='vendor/countdowntime/countdowntime.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"84b9b0632e309389","version":"2024.1.0","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
 </body>
-
 </html>
