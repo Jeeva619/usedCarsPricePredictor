@@ -10,7 +10,6 @@ CORS(app)
 
 model = pickle.load(open('UsedCarPricePredictor.pkl','rb'))
 #model = DecisionTreeRegressor(random_state=42,monotonic_cst = [1, -1, 1])
-
 @app.route('/')
 
 def home():
