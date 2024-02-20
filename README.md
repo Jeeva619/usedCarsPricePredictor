@@ -1,5 +1,5 @@
 ### CarPricepredictor
-
+This project involves forecasting the sales price of used cars based on various parameters. The objective is to predict the SalePrice of the used cars in India .
 ## Software Requirements
 
 1. [GithubAccount](https://github.com)
